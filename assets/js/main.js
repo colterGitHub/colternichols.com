@@ -260,7 +260,7 @@
 
   function getAge() {
     var today = new Date();
-    var birthDate = new Date('2002, 09, 06');
+    var birthDate = new Date('2002-09-06');
     var age = today.getFullYear() - birthDate.getFullYear();
     console.log(birthDate.getFullYear());
     console.log(today.getFullYear());
