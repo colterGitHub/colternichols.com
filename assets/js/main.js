@@ -34,7 +34,7 @@
   }
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
@@ -189,7 +189,7 @@
   });
 
   /**
-   * Initiate portfolio lightbox 
+   * Initiate portfolio lightbox
    */
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
@@ -254,8 +254,61 @@
   });
 
   /**
-   * Initiate Pure Counter 
+   * Initiate Pure Counter
    */
   new PureCounter();
+
+  function getAge() {
+    var today = new Date();
+    var birthDate = new Date('2002, 09, 06');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    console.log(birthDate.getFullYear());
+    console.log(today.getFullYear());
+    console.log(age);
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    document.getElementById("age").textContent = age;
+  }
+  getAge();
+ //
+ //  $.ajax({
+ //  type: "POST",
+ //  url: "localProxy.php",
+ //  data: {url: "maybe_send_your_url_here.php?product_id=1"}
+ //  }).done(function( html ) {
+ //   // do something with your HTML!
+ // });
+ //
+ //  $doc = new DOMDocument('1.0', 'UTF-8');
+ //  // load the string into the DOM (this is your page's HTML), see below for more info
+ //  $doc->loadHTMLFile ('http://third_party_url_here.php?query=string');
+ //
+ //  // since we are working with HTML fragments here, remove <!DOCTYPE
+ //  $doc->removeChild($doc->firstChild);
+ //
+ //  // remove <html></html> and any junk
+ //  $body = $doc->getElementsByTagName('body');
+ //  $doc->replaceChild($body->item(0), $doc->firstChild);
+ //
+ //  // now, you can get any portion of the html (target a div, for example) using familiar DOM methods
+ //
+ //  // echo the HTML (or desired portion thereof)
+ //  die($doc->saveHTML());
+ //
+ //  $.get('https://www.last.fm/user/colternichols7/library').then(function (html) {
+ //    // Success response
+ //    var $streams = $(html).find('.metadata-display');
+ //    console.log($streams.html());
+ //  }, function () {
+ //    // Error response
+ //    console.log('Access denied');
+ //  });
+ //
+ //  var streams = $( ".metadata-display" ).load( "https://www.last.fm/user/colternichols7/library");
+ //
+ //  console.log(streams);
+
 
 })()
