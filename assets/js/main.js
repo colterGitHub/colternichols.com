@@ -1,9 +1,4 @@
-/**
-* Template Name: iPortfolio - v3.9.1
-* Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+
 (function() {
   "use strict";
 
@@ -272,6 +267,17 @@
     document.getElementById("age").textContent = age;
   }
   getAge();
+
+  function fetchData() {
+    console.log('Start Fetch');
+    fetch('https://stats.fm/colter.nichols').then(response => {
+      console.log(response);
+    })
+
+  }
+
+fetchData();
+
  //
  //  $.ajax({
  //  type: "POST",
