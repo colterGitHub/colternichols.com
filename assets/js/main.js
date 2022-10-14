@@ -2,6 +2,15 @@
 (function() {
   "use strict";
 
+  const statsfm = 'https://beta-api.stats.fm/api/v1/users/colter.nichols/streams/stats?range=lifetime';
+  const streamCounter = document.querySelector("#streamCounter");
+  const hourCounter = document.querySelector("#hourCounter");
+
+
+
+  calcAge();
+  fetchData();
+
   /**
    * Easy selector helper function
    */
@@ -251,9 +260,15 @@
   /**
    * Initiate Pure Counter
    */
-  new PureCounter();
+  new PureCounter({
+    separator: true,
+    once: true
+  });
 
-  function getAge() {
+  /**
+   * Calculates colter's age
+   */
+  function calcAge() {
     var today = new Date();
     var birthDate = new Date('2002-09-06');
     var age = today.getFullYear() - birthDate.getFullYear();
@@ -266,55 +281,27 @@
     }
     document.getElementById("age").textContent = age;
   }
-  getAge();
 
+  /**
+  * gets data
+  */
   function fetchData() {
-    console.log('Start Fetch');
-    fetch('https://stats.fm/colter.nichols').then(response => {
-      console.log(response);
+    fetch(statsfm)
+    .then((response) => {
+      return response.json();
     })
+    .then((data) => {
+      let streamCount = data.items.count;
+      let streamTime = (data.items.durationMs);
+      streamTime = (streamTime)/(1000*60*60);
+      streamCounter.setAttribute("data-purecounter-end", streamCount);
+      hourCounter.setAttribute("data-purecounter-end", streamTime);
 
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
   }
-
-fetchData();
-
- //
- //  $.ajax({
- //  type: "POST",
- //  url: "localProxy.php",
- //  data: {url: "maybe_send_your_url_here.php?product_id=1"}
- //  }).done(function( html ) {
- //   // do something with your HTML!
- // });
- //
- //  $doc = new DOMDocument('1.0', 'UTF-8');
- //  // load the string into the DOM (this is your page's HTML), see below for more info
- //  $doc->loadHTMLFile ('http://third_party_url_here.php?query=string');
- //
- //  // since we are working with HTML fragments here, remove <!DOCTYPE
- //  $doc->removeChild($doc->firstChild);
- //
- //  // remove <html></html> and any junk
- //  $body = $doc->getElementsByTagName('body');
- //  $doc->replaceChild($body->item(0), $doc->firstChild);
- //
- //  // now, you can get any portion of the html (target a div, for example) using familiar DOM methods
- //
- //  // echo the HTML (or desired portion thereof)
- //  die($doc->saveHTML());
- //
- //  $.get('https://www.last.fm/user/colternichols7/library').then(function (html) {
- //    // Success response
- //    var $streams = $(html).find('.metadata-display');
- //    console.log($streams.html());
- //  }, function () {
- //    // Error response
- //    console.log('Access denied');
- //  });
- //
- //  var streams = $( ".metadata-display" ).load( "https://www.last.fm/user/colternichols7/library");
- //
- //  console.log(streams);
 
 
 })()
